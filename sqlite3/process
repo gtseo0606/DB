@@ -1,0 +1,54 @@
+전체 코드
+import sqlite3
+​
+conn = sqlite3.connect("test.db")
+​
+with conn:
+   cur = conn.cursor()
+   sql = "select * from Student where id = ? or name = ?"
+​
+   rows = cur.execute(sql, (10, '홍길순x'))
+​
+   # cur.execute(sql, (1, '홍길순'))
+   # rows = cur.fetchall()
+​
+for row in rows: # row를 불러올때 하다가 에러가 생기면 종료를 못하니 with 구문을 사용해 종료가 가능하게 한다.
+   print(row)​
+​
+​진행순서
+1. connect()를 이용해 test.db에 접속한다.
+​
+import sqlite3
+conn = sqlite3.connect("test.db")
+​
+2. 커서를 통해 sql문을 실행시킨다.​
+​
+cur = conn.cursor()
+sql = "select * from Student where id = ? or name = ?"
+​rows = cur.execute(sql, (10, '홍길순x')) # ?에 들어갈 값들​
+​
+2-1. sql문을 컴파일(byte code화)시킨다. cf)하지만 sql문에서 ?를 사용하면 매번 컴파일하지 않는다 -> prepared, precompiled
+2-2. byte code를 sqlite 메모리에 올린다.
+2-3. sqlite 메모리에 있는 byte code​로 디스크 속 Student 테이블에서 하나씩 원하는 row를 찾는다. -> fetchall()​
+​
+​
+# insert into -> tx = transaction = 거래
+sql = "insert into tt(id, name) values(?,?)" # insert into시 Student ​테이블에 lock이 걸린다.(insert할때 다른 사람도 insert하면 error가 발생하므로)
+cur.executemany(sql, data)
+​conn.commit() # commit을 하는 순간 lock이 풀린다.​
+​
+​
+# executemany()​
+import sqlite3
+conn = sqlite3.connect("test.db")
+data = (
+   (21, '홍길동'),
+   (22, '홍길순')
+)
+​
+with conn:
+   cur = conn.cursor()
+   sql = "insert into tt(id, name) values(?,?)"
+   cur.executemany(sql, data) # (?,?)에 들어가는 데이터가 여러개일때 executemany() 사용
+​
+   conn.commit()​
