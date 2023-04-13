@@ -1,0 +1,4 @@
+show dbs; # db의 목록과 용량을 보여준다
+use test; # rdbms 파일을 업로드하는 방법 # use 명령을 이용해서 해당 데이터베이스의 이름을 입력
+db.test.save<<a:1>> # save해야 show dbs시 test파일도 나오게 된다.
+show collections; # 해당 db 에서 만들어져 있는 컬렉션 리스트를 볼 수가 있습니다
