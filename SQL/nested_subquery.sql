@@ -1,0 +1,50 @@
+-- 중첩서브쿼리(WHERE절)
+
+-- EX1-1)
+-- '='이라 단일행 서브쿼리라 부른다.
+SELECT * FROM HR.EMPLOYEES A
+ WHERE A.DEPARTMENT_ID = (SELECT B.DEPARTMENT_ID
+    						FROM HR.DEPARTMENT B
+    					   WHERE B.LOCATION_ID=1800);
+
+-- EX1-2)
+-- 'IN'으로 범위를 사용할수 있다.
+-- 실행계획을 보면 서브쿼리를 풀고(해제) 해시조인을 한다.
+-- 풀고 싶지 않아 힌트 /*+NO_UNNEST*/를 사용 후 실행결과를 보면 버퍼가 더 늘어나있다. -> 처음했던 옵티마이저 실행계획이 더 좋다
+SELECT * FROM HR.EMPLOYEES A
+ WHERE A.DEPARTMENT_ID IN (SELECT B.DEPARTMENT_ID
+    						FROM HR.DEPARTMENT B
+    					   WHERE B.LOCATION_ID=1700);
+
+-- EX1-3)
+-- 그냥 JOIN (위와 결과+실행결과 동일)
+SELECT *
+  FROM HR.EMPLOYEES A, 
+	   HR.DEPARTMENT B
+ WHERE A.DEPARTMENT_ID = B.DEPARTMENT_ID
+   AND B.LOCATION_ID=1700;
+
+
+
+-- 서브쿼리를 사용하면 안되는 유형(같은 테이블을 3번 엑세스 -> 3배의 성능차이)
+-- EX2-1)
+-- 버퍼 18개
+SELECT A.EMPLOYEE_ID,
+	   A.SALARY
+  FROM HR.EMPLOYEES A
+ WHERE A.SALARY = (SELECT MIN(SALARY) FROM HR.EMPLOYEES)
+    OR A.SALARY = (SELECT MAX(SALARY) FROM HR.EMPLOYEES)
+
+-- EX2-2)
+-- 버퍼 6개
+SELECT B.EMPLOYEE_ID,
+	   B.SALARY
+  FROM (
+    		SELECT A.EMPLOYEE_ID,
+	   			   A.SALARY
+    			   ROW_NUMBER() OVER(ORDER BY SALARY) MINSAL,
+    			   ROW_NUMBER() OVER(ORDER BY SALARY) MAXSAL
+    		  FROM HR.EMPLOYEES A
+    	)B
+
+ WHERE B.MINSAL = 1 OR B.MAXSAL = 1;
