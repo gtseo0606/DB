@@ -1,0 +1,11 @@
+즐겨찾기가 가장 많은 식당 정보 출력하기
+REST_INFO 테이블에서 음식종류별로 즐겨찾기수가 가장 많은 식당의 음식 종류, ID, 식당 이름, 즐겨찾기수를 조회하는 SQL문을 작성해주세요. 이때 결과는 음식 종류를 기준으로 내림차순 정렬해주세요.
+
+-- MYSQL, ORACLE
+SELECT B.FOOD_TYPE, B.REST_ID, B.REST_NAME, B.FAVORITES
+FROM (SELECT FOOD_TYPE, MAX(FAVORITES) FAVORITES
+      FROM REST_INFO
+      GROUP BY FOOD_TYPE) A, REST_INFO B
+WHERE A.FOOD_TYPE = B.FOOD_TYPE
+AND A.FAVORITES = B.FAVORITES
+ORDER BY FOOD_TYPE DESC;
