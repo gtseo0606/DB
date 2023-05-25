@@ -1,0 +1,23 @@
+옵티마이저와 실행계획
+
+3. SQL 처리 흐름도(ACCESS FLOW DIAGRAM)
+-> SQL 내부 처리 절차(실행계획)를 시각적으로 표현
+-> 1. 조인 순서(TAB1 → TAB2)
+-> 2. 엑세스 기법(TAB1 = FULL TABLE SCAN(SCAN),  TAB2 = INDEX SCAN(RANDOM))
+-> 3. 조인 기법(NL JOIN)
+
+OUTER TABLE(=DRIVING TABLE)
+INNER TABLE(=LOOKUP TABLE)
+
+SELECT * 
+FROM TAB1 A, TAB2 B 
+WHERE A.KEY = B.KEY 
+AND A.COL1 = :condition1 
+AND B.COL2 = :condition2
+
+진행순서
+1. TAB1 FULL TABLE SCAN(엑세스 건수)
+-> TAB1의 A.COL1 칼럼에 이용 가능한 인덱스가 존재하지 않아 전체 테이블 스캔을 수행
+-> 인덱스(I01_TAB2) 생성
+2. A.COL1 = :condition1 조건을 만족한 건(조인 시도 건수)만이 TAB2와 조인
+3. B.KEY 칼럼만으로 구성된 인덱스인 I01_TAB2에서 B.KEY = A.KEY (TAB1은 이미 읽혀졌기 때문에 A.KEY 값은 상수임) 조건을 만족한 건만이 TAB2 테이블을 액세스(테이블 액세스 건수)
