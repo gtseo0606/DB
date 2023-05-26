@@ -1,0 +1,54 @@
+Sturctured English Query Langauge = Sequel 
+
+Sequel이 상표등록되어 sql로 변경
+
+
+나=유저=사용자=작가(소프트웨어 조작)
+소프트웨어(SQL로 요청 + 결과표시)
+사서(RDBMS)가 책장(RDB)에서 선택해서 줌
+사서 머리속에(RDBMS상에) 일련의 작업을 넣어놓고 호출해 실행하는 프로그램 제작도 가능하다.(저장 프로시저) Stored Procedure
+
+사투리처럼 SQL별로도 독자적인 로컬 규칙이 존재
+
+쿼리 > SQL문
+
+객체 지향 데이터베이스
+테이블로 된 RDB와 달리 OODB(객체 지향 데이터베이스)는 틀에 얽매이지 않는 형태
+OQL 언어 이용
+
+DDL(Definition) : CREATE
+DML(Manipulation) : SELECT, INSERT
+DCL(Control) : COMMIT, ROLLBACK
+
+-- DB 만들기
+CREATE DATABASE db_book;
+-- DB 지정하기
+USE db_book;
+-- 테이블 만들기
+CREATE TABLE tab_book (code INT, title VARXHAR(30), price INT);
+
+제약조건 : PRIMARY KEY(기본키), UNIQUE, CHECK(조건문), NOT NULL, DEFAULT = 값
+
+-- 데이터 등록
+INSERT INTO (code, title, price) VALUES (111, '그림책', 12000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
