@@ -33,7 +33,11 @@ CREATE TABLE tab_book (code INT, title VARXHAR(30), price INT);
 INSERT INTO (code, title, price) VALUES (111, '그림책', 12000)
 
 연산자
+산술연산자 : *(애스터리스크), PRICE*0.05, TOTAL/NUMBER
+비교연산자
+논리연산자
 
+ WHERE 절 : 데이터 추출 조건을 지정
 
 
 
