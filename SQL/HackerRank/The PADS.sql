@@ -25,7 +25,8 @@ SELECT NAME || '(' || SUBSTR(OCCUPATION, 1,1) || ')'
 FROM OCCUPATIONS  
 ORDER BY NAME ASC;
 
-SELECT 'There are a total of ' || COUNT(OCCUPATION) || ' ' || LOWER(occupation) || 's.' FROM OCCUPATIONS 
+SELECT 'There are a total of ' || COUNT(OCCUPATION) || ' ' || LOWER(occupation) || 's.' 
+FROM OCCUPATIONS 
 GROUP BY OCCUPATION 
 ORDER BY COUNT(NAME), OCCUPATION ASC;
 
