@@ -27,10 +27,8 @@ FROM (
     FROM
         OCCUPATIONS
 )
-GROUP BY
-    rn
-ORDER BY
-    rn;
+GROUP BY rn
+ORDER BY rn;
 
 -- MS SQL
 SELECT
