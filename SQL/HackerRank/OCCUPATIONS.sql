@@ -9,7 +9,7 @@ WITH temp AS (
         ROW_NUMBER() OVER(PARTITION BY Occupation ORDER BY Name) as rn 
     FROM OCCUPATIONS
 )
-SELECT MAX(doctor),MAX(professor),MAX(singer),MAX(actor)
+SELECT MAX(doctor), MAX(professor), MAX(singer), MAX(actor)
 FROM temp
 GROUP BY rn;
 
