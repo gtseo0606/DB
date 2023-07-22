@@ -14,7 +14,7 @@ FROM POINTS
 
 
 -- MS SQL SERVER
-SELECT CAST(ABS((MAX(LAT_N) - MIN(LAT_N)) + (max(LONG_W) - MIN(LONG_W))) AS decimal(10,4)) 
+SELECT CAST(ABS((MAX(LAT_N) - MIN(LAT_N)) + (MAX(LONG_W) - MIN(LONG_W))) AS decimal(10,4)) 
 FROM station
 
 -- ORACLE
