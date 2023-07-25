@@ -18,7 +18,7 @@ SELECT CAST(ABS((MAX(LAT_N) - MIN(LAT_N)) + (MAX(LONG_W) - MIN(LONG_W))) AS deci
 FROM station
 
 -- ORACLE
-select round(MAX(LAT_N)-MIN(LAT_N)+max(LONG_W)-min(LONG_W),4) from STATION;
+select round(MAX(LAT_N)-MIN(LAT_N)+max(LONG_W)-MIN(LONG_W),4) from STATION;
 
 -- DB2
 SELECT
