@@ -1,7 +1,7 @@
 Weather Observation Station 18
 
 -- MYSQL
-WITH POINTS as (
+WITH POINTS AS (
     SELECT
         MIN(LAT_N) AS a,
         MIN(LONG_W) AS b,
