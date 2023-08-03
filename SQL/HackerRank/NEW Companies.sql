@@ -15,7 +15,7 @@ WHERE e.company_code = c.company_code
 GROUP BY company_code, founder;
 
 -- oracle, db2
-select c.company_code, 
+SELECT c.company_code, 
        c.founder, 
        count(distinct e.lead_manager_code),
        count(distinct e.senior_manager_code),
