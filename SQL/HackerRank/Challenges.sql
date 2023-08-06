@@ -5,7 +5,7 @@ WITH DATASET1 AS (SELECT hacker_id, COUNT(challenge_id) tot_challenges
                   FROM Challenges C  
                   GROUP BY hacker_id),
 RANKED_DATASET1 AS (SELECT DS1.*, dense_rank() OVER(ORDER by tot_challenges desc ) rnk 
-                    FROM DATASET1 DS1 ),
+                    FROM DATASET1 DS1),
 DATASET2 AS (SELECT tot_challenges, COUNT(hacker_id) tot_hackers 
              FROM RANKED_DATASET1 RDS1  
              GROUP BY tot_challenges)
