@@ -4,7 +4,7 @@ Top Competitors
 SELECT s.hacker_id, h.name
 from Hackers as h
 join Submissions as s  on s.hacker_id = h.hacker_id
-join Challenges as c on s.challenge_id = c.challenge_id
+JOIN Challenges as c on s.challenge_id = c.challenge_id
 join Difficulty as d on d.difficulty_level = c.difficulty_level
 
 WHERE d.score = s.score
