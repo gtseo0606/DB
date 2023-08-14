@@ -9,6 +9,6 @@ join Difficulty as d on d.difficulty_level = c.difficulty_level
 
 WHERE d.score = s.score
 GROUP BY hacker_id, h.name
-having count(s.challenge_id) > 1
+HAVING count(s.challenge_id) > 1
 
 order by count(s.challenge_id) desc, s.hacker_id;
