@@ -11,4 +11,4 @@ WHERE d.score = s.score
 GROUP BY hacker_id, h.name
 HAVING count(s.challenge_id) > 1
 
-ORDER by count(s.challenge_id) desc, s.hacker_id;
+ORDER BY count(s.challenge_id) desc, s.hacker_id;
